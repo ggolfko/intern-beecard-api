@@ -1,59 +1,61 @@
 var app = require('express')();
 var port = process.env.PORT || 7777;
-var users = require('./user');
 var bodyParser = require('body-parser');
-var mysql = require('mysql');
+var mysql = require('mysql')
 
-app.use(function(req, res, next){
-    res.locals.connection = mysql.createConnection({
-        host        : 'localhost',
-        user        : 'root',
-        password    : '',
-        database    : 'beecard'
-    });
-    res.locals.connect();
-    next();
-});
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use('/', index);
-app.use('/api/v1/users', users)
+var con = mysql.createConnection({
+    host        : 'localhost',
+    user        : 'root',
+    password    : 'root',
+    database    : 'beecard'
+})
 
-router.get('/', function(req, res, next){
-    res.locals.connection.query('SELECT * from users', function(error, result, fields) {
-        // if (error) thorw error
-        res.send(JSON.stringify({"status": 200, "error": null, "response": result}))
+con.connect(function(err) {
+    if(err) throw err
+    console.log("Connected!!")
+})
+
+app.put('/ebouchures', (req, res) => {
+    const body = req.body
+    var sql = "UPDATE ebouchures SET name = '"+ body.name +"' WHERE id = '"+ body.id +"'"
+    con.query(sql, function(err, result) {
+        if(err) throw err
+        res.json("updated success!")
     })
 })
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
-    extended: true
-}));
-
-app.get('/', function (req, res) {
-    res.send('<h1> Hello Node.js</h1>');
-});
-
-app.get('/server', function (req,res) {
-    res.send('<h1> This is index page </h1>');
-});
-
-app.get('/user', function (req, res) {
-    res.json(users.findAll());
+app.get('/ebouchures', (req, res) => {
+    var sql = "SELECT * FROM ebouchures"
+    const query = req.query
+    console.log(query)
+    if( query.id != null && query.id != undefined && query.id != '' ){
+        sql = "SELECT * FROM ebouchures WHERE id=" + query.id
+    }
+    con.query(sql, function(err, result, fields) {
+        if(err) throw err
+        res.json(result)
+        res.json(fields)
+    })
 })
 
-app.get('/user/:id', function (req, res) {
-    var id = req.params.id;
-    res.json(users.findById(id));
+app.post('/ebouchures', (req, res) => {
+    var sql = "INSERT INTO ebouchures(name) VALUES '"+ req.body.name +"')"
+    con.query(sql, function(err, result) {
+        if(err) throw err
+        res.json("added success!")
+    })
 })
 
-app.post('/newuser', function (req, res) {
-    var json = req.body;
-    res.send('Add new ' + json.name + 'Finish!')
-    console.log(req.body)
-
+app.delete('/ebouchures', (req, res) => {
+    var sql = "DELETE FROM ebouchures WHERE id =" + req.body.id
+    con.query(sql, function(err, result) {
+        if(err) throw err
+        res.json("deleted success!")
+    })
 })
-
 
 app.listen(port, function() {
     console.log('starting node.js on port' + port);
