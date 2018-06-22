@@ -1,5 +1,5 @@
 var app = require('express')();
-var port = process.env.PORT || 7777;
+var port = 7777;
 var bodyParser = require('body-parser');
 var mysql = require('mysql')
 
@@ -15,7 +15,7 @@ var con = mysql.createConnection({
 
 con.connect(function(err) {
     if(err) throw err
-    console.log("Connected!!")
+    console.log("Connected!")
 })
 
 app.put('/ebouchures', (req, res) => {
@@ -35,11 +35,11 @@ app.put('/ebouchures', (req, res) => {
 })
 
 app.get('/ebouchures', (req, res) => {
-    var sql = "SELECT * FROM ebouchures"
+    var sql = `SELECT * FROM ebouchures`
     const query = req.query
     console.log(query)
     if( !!query.id ){
-        sql = "SELECT * FROM ebouchures WHERE id="+query.id
+        sql = `SELECT * FROM ebouchures WHERE id='${query.id}'`
     }
     con.query(sql, function(err, result) {
         if(err) throw err
@@ -65,7 +65,7 @@ app.post('/ebouchures', (req, res) => {
 })
 
 app.delete('/ebouchures', (req, res) => {
-  var sql = "DELETE FROM ebouchures WHERE id =" +req.body.id
+  var sql = `DELETE FROM ebouchures WHERE id='${req.body.id}'`
   con.query(sql, function(err, result) {
       if(err) throw err
       res.json("deleted success!")
@@ -83,7 +83,7 @@ app.get('/ebouchures/users', (req, res) => {
   var sql = "SELECT * FROM users"
   const query = req.query
   if(!!query.id){
-      sql = "SELECT * FROM users WHERE id=" + query.id
+      sql = `SELECT * FROM users WHERE id='${body.id}'`
   }
   con.query(sql, function(err, result) {
       if(err) throw err
@@ -103,6 +103,15 @@ app.post('/ebouchures/users', (req, res) => {
     con.query(sql, function(err, result) {
         if(err) throw err
         res.json("add success!")
+    })
+})
+
+app.delete('/ebouchures/users', (req, res) => {
+    const body = req.body
+    let sql = `DELETE FROM users WHERE '${body.id}'`
+    con.query(sql, function(err, result) {
+        if(err) throw err
+        res.json({message:"deleted success!"})
     })
 })
 
