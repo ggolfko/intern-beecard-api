@@ -17,9 +17,9 @@ router.route('/ebouchures')
                   '${body.postalCode}', '${body.isActive}', '${body.locale}', '${body.publish}', '${body.private}',
                   '${body.market}', '${body.note}')`
         console.log(sql)
-        con.query(sql, function(err, result) {
-            if(err) throw err
-            res.json({message:"added success!"})
+        doQuery(sql).then(resp=>res.json('added success!'))
+        .catch((err)=> {
+          res.json({message:err})
         })
     })
 
@@ -31,18 +31,18 @@ router.route('/ebouchures')
     if( !!query.id ){
         sql = `SELECT * FROM ebouchures WHERE id='${query.id}'`
     }
-    con.query(sql, function(err, result) {
-        if(err) throw err
-        res.json(result)
-    })
+    doQuery(sql).then(resp=>res.json(resp))
+        .catch((err)=> {
+          res.json({message:err})
+        })
     })
 
     .delete((req, res) => {
         var sql = `DELETE FROM ebouchures WHERE id='${req.body.id}'`
-        con.query(sql, function(err, result) {
-            if(err) throw err
-            res.json("deleted success!")
-    })
+        doQuery(sql).then(resp=>res.json('deleted success!'))
+        .catch((err)=> {
+          res.json({message:err})
+        })
     })
 
     .put((req, res) => {
@@ -55,10 +55,10 @@ router.route('/ebouchures')
                   isActive='${body.isActive}', locale='${body.locale}', publish='${body.publish}', private='${body.private}',
                   market='${body.market}', note='${body.note}' WHERE id='${body.id}'  `
     
-        con.query(sql, function(err, result) {
-            if(err) throw err
-            res.json("updated success!")
-        })
+                  doQuery(sql).then(resp=>res.json('update success!'))
+                  .catch((err)=> {
+                    res.json({message:err})
+                  })
     })
 
 router.route('/ebouchures/:id')
@@ -66,13 +66,20 @@ router.route('/ebouchures/:id')
     .get((req, res) => {
         const params = req.params
         var sql = `SELECT * FROM ebouchures WHERE id='${params.id}'`
-        con.query(sql, function(err, result) {
-            if(err) throw err
-            res.json(result)
+        doQuery(sql).then(resp=>res.json(resp))
+        .catch((err)=> {
+          res.json({message:err})
         })
     })
 
-
+function doQuery(sql){
+        return new Promise(function (resolve, reject){
+          con.query(sql, function(err, result) {
+            if(err) reject(err)
+            resolve(result)
+        })
+        })
+  }
     
     
 
