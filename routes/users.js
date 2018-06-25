@@ -30,7 +30,6 @@ router
          });
       }
       if (!body.lastname) {
-         console.log(body.lastname);
          mistake.push({
             message: "require lastname"
          });
@@ -39,6 +38,15 @@ router
          mistake.push({
             message: "require username"
          });
+      }else{
+         let sql = `SELECT * FROM users WHERE username LIKE '${body.username}'`
+         doQuery(sql).then(resp=>{
+            if(resp.length != 0){
+               mistake.push({message:'existed'})
+               return false
+            }
+         })
+         
       }
       if (!body.password) {
          mistake.push({
@@ -50,7 +58,17 @@ router
             message: "require email"
          });
       }
-      if (body.firstname && body.lastname && body.username && body.password && body.email) {
+      var filter = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      if (!filter.test(body.email)) {
+         mistake.push({
+            message: 'invalid format'
+         })
+      }
+      
+      if (mistake.length != 0){
+         res.json(mistake);
+      }
+      if (body.firstname && body.lastname && body.username!=false && body.password && filter.test(body.email)) {
          let sql = `INSERT INTO users(userId, firstname, lastname, username, password, email, tel, privilege)
           VALUES ('${mongoObjectId()}', '${body.firstname}', '${
           body.lastname}', '${body.username}', '${body.password}', 
@@ -66,8 +84,7 @@ router
             });
          });
       }
-      if (mistake.length != 0)
-         res.json(mistake);
+     
    })
 
    .put((req, res) => {
@@ -105,10 +122,6 @@ router
    .get((req, res) => {
       const params = req.params;
       var sql = `SELECT * FROM users WHERE id='${params.id}'`;
-      // con.query(sql, function(err, result) {
-      //     if(err) throw err
-      //     res.json(result)
-      // })
       doQuery(sql)
          .then(resp => res.json(resp))
          .catch(err => {
