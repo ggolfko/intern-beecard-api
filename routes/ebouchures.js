@@ -54,7 +54,7 @@ router.route('/ebouchures')
             message: 'require address'
          })
       }
-      if (body.name && body.content && body.organization && body.email && body.tel && body.postalCode && body.country && body.address) {
+      if (body.name) {
          var sql = `INSERT INTO ebouchures(name, ebrochureId, userId, content, organization, tel, cc_tel, email,
                 website, line, facebook, twitter, linkedin,  photo, qrcode, address, locality, region, country,
                 postalCode, isActive, locale, publish, private, market, note) 
@@ -71,6 +71,7 @@ router.route('/ebouchures')
                })
             })
       }
+      
       if(miss.length != 0){
          res.json(miss)
       }

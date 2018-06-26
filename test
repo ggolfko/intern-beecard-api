@@ -1,0 +1,130 @@
+//  if (!body.name) {
+//    miss.push({
+//      message: 'require name'
+//    })
+//  }
+//  if (!body.content) {
+//    miss.push({
+//      message: 'require content'
+//    })
+//  }
+//  if (!body.organization) {
+//    miss.push({
+//      message: 'require organization'
+//    })
+//  }
+//  if (!body.tel) {
+//    miss.push({
+//      message: 'require tel'
+//    })
+//  }
+//  if (!body.email) {
+//    miss.push({
+//      message: 'require email'
+//    })
+//  }
+//  if (!body.postalCode) {
+//    miss.push({
+//      message: 'require postalcode'
+//    })
+//  }
+//  if (!body.country) {
+//    miss.push({
+//      message: 'require country'
+//    })
+//  }
+//  if (!body.address) {
+//    miss.push({
+//      message: 'require address'
+//    })
+//  }
+
+//  let sql = `INSERT INTO ebouchures(name, ebrochureId, userId, content, organization, tel, cc_tel, email,
+//                   website, line, facebook, twitter, linkedin,  photo, qrcode, address, locality, region, country,
+//                   postalCode, isActive, locale, publish, private, market, note) 
+//                   VALUES ('${body.name}', '${mongoObjectId()}', '${body.userId}', '${body.content}', '${body.organization}',
+//                   '${body.tel}', '${body.cc_tel}', '${body.email}', '${body.website}', '${body.line}', '${body.facebook}', '${body.twiiter}',
+//                   '${body.linkedin}', '${body.photo}', '${body.qrcode}', '${body.address}', '${body.locality}', '${body.region}', '${body.country}',
+//                   '${body.postalCode}', '${body.isActive}', '${body.locale}', '${body.publish}', '${body.private}',
+//                   '${body.market}', '${body.note}')`
+
+//  if (!body.firstname) {
+//    mistake.push({
+//      message: "require field!"
+//    });
+//  }
+//  if (!body.lastname) {
+//    mistake.push({
+//      message: "require lastname"
+//    });
+//  }
+//  if (!body.username) {
+//    mistake.push({
+//      message: "require username"
+//    });
+//  } else {
+//    let sql = `SELECT * FROM users WHERE username LIKE '${body.username}'`
+//    var x = true
+//    doQuery(sql).then((resp) => {
+//      console.log(resp)
+//      return doQuery(sql)
+//    }).then((resp) => {
+//      mistake.push({
+//        message: 'existed'
+//      })
+//      console.log(resp)
+//      //return doQuery(sql)
+//    }).then((resp) => {
+
+//    })
+//  }
+//  if (!body.password) {
+//    mistake.push({
+//      message: "require password"
+//    });
+//  }
+//  if (!body.email) {
+//    mistake.push({
+//      message: "require email"
+//    });
+//  }
+//  var filter = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+//  if (!filter.test(body.email)) {
+//    mistake.push({
+//      message: 'invalid format'
+//    })
+//  }
+
+//  if (mistake.length > 0) {
+//    res.json(mistake);
+//  } else if (body.firstname && body.lastname && body.username && body.password && filter.test(body.email) && x) {
+//    let sql = `INSERT INTO users(userId, firstname, lastname, username, password, email, tel, privilege)
+//           VALUES ('${mongoObjectId()}', '${body.firstname}', '${
+//           body.lastname}', '${body.username}', '${body.password}', 
+//           '${body.email}', '${body.tel}', '${body.privilege}')`;
+//    doQuery(sql).then(resp => {
+//      console.log(resp)
+//      res.json({
+//        message: 'added success'
+//      })
+//    }).catch(err => {
+//      res.json({
+//        message: err
+//      });
+//    });
+//  }
+
+//  const body = req.body;
+//  let sql = `UPDATE users SET firstname='${body.firstname}', lastname='${
+//       body.lastname
+//     }', username='${body.username}', password='${body.password}', 
+//                   email='${body.email}', tel='${body.tel}', privilege='${
+//       body.privilege
+//     }' WHERE id='${body.id}'`;
+//  doQuery(sql)
+//    .then(resp => res.json("updated success!"))
+//    .catch(err => {
+//      res.json({
+//        message: err
+//      });
+//    });
