@@ -165,14 +165,21 @@ router
 
   .delete((req, res) => {
     const body = req.body;
-    let sql = `DELETE FROM users WHERE id='${body.id}'`;
-    doQuery(sql)
-      .then(resp => res.json("deleted success!"))
-      .catch(err => {
-        res.json({
-          message: err
+    if (body.id) {
+      let sql = `DELETE FROM users WHERE id='${body.id}'`;
+      doQuery(sql)
+        .then(resp => res.json("deleted success!"))
+        .catch(err => {
+          res.json({
+            message: err
+          });
         });
-      });
+    } else {
+      res.json({
+        message: 'require id to delete'
+      })
+    }
+
   });
 
 router
@@ -199,7 +206,7 @@ function doQuery(sql) {
   });
 }
 
-router 
+router
   .route('/users/pswd/:id')
 
   .get((req, res) => {
