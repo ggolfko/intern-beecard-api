@@ -9,6 +9,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(morgan('dev'))
 app.use(methodOverride())
+app.use('/uploads', express.static('uploads'))
 
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin','*')
