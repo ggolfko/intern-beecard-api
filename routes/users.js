@@ -9,11 +9,21 @@ router
   .get((req, res) => {
     var sql = "SELECT * FROM users";
     const query = req.query;
+    const body = req.body
+    // if(query.id){
+    //   sql = `SELECT * FROM users WHERE id='${query.id}'`
+    // }
     if (!!query.id) {
       sql = `SELECT * FROM users WHERE id='${body.id}'`;
     }
+    if(query.q){
+      sql = `SELECT * FROM users WHERE firstname REGEXP '${query.q}' OR lastname REGEXP '${query.q}' 
+      OR username REGEXP '${query.q}' OR email REGEXP '${query.q}'`
+    }
     doQuery(sql)
-      .then(resp => res.json(resp))
+      .then((resp) => {
+        res.json(resp)
+      })
       .catch(err => {
         res.json({
           message: err
@@ -91,7 +101,8 @@ router
                     '${body.email}', '${body.tel}', '${body.privilege}')`;
           doQuery(sql).then(resp => {
             res.json({
-              message: 'added success'
+              message: 'added success',
+              data: resp
             })
           }).catch(err => {
             res.json({
@@ -136,8 +147,14 @@ router
         if (mistake.length > 0) {
           res.json(mistake)
         }
+        console.log(action)
         return action
       }).then((resp) => {
+        console.log({
+          message: 'resp->then',
+          resp
+        })
+        var filter = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
         if (resp && body.firstname && body.password && body.tel && body.lastname && filter.test(body.email)) {
           let sql = `UPDATE users SET firstname='${body.firstname}', lastname='${
             body.lastname

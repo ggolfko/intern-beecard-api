@@ -85,6 +85,15 @@ router.route('/ebouchures')
       if (!!query.id) {
          sql = `SELECT * FROM ebouchures WHERE id='${query.id}'`
       }
+      if (query.q){
+            sql = `SELECT * FROM ebouchures WHERE  name REGEXP '${query.q}' OR content REGEXP '${query.q}' OR organization REGEXP '${query.q}' OR 
+            tel REGEXP '${query.q}' OR tel REGEXP '${query.q}' OR cc_tel REGEXP '${query.q}' OR email REGEXP '${query.q}' OR 
+            website REGEXP '${query.q}' OR line REGEXP '${query.q}' OR facebook REGEXP '${query.q}' OR twitter REGEXP '${query.q}' OR
+            linkedin REGEXP '${query.q}' OR photo REGEXP '${query.q}' OR qrcode REGEXP '${query.q}' OR address REGEXP '${query.q}' OR 
+            locality REGEXP '${query.q}' OR region REGEXP '${query.q}' OR country REGEXP '${query.q}' OR postalCode REGEXP '${query.q}' OR 
+            isActive REGEXP '${query.q}' OR locale REGEXP '${query.q}' OR publish REGEXP '${query.q}' OR private REGEXP '${query.q}' OR
+            market REGEXP '${query.q}' OR note REGEXP '${query.q}'`
+      }
       doQuery(sql).then(resp => res.json(resp))
          .catch((err) => {
             res.json({

@@ -12,6 +12,5 @@ var server = app.listen(port, function() {
 
     let host = server.address().address
     let port = server.address().port
-    console.log('starting node.js on' + port + host);
+    console.log('Listening on port ' + port );
 });
-
