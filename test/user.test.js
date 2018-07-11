@@ -37,7 +37,7 @@ describe('Post User tests', () => {
             .then(resp => {
                 //expect an object back
                 expect(typeof resp).to.equal('object')
-                expect(resp.message).to.equal('existed')
+                expect(resp[0].message).to.equal('existed')
             });
     });
 });

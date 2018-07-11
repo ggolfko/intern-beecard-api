@@ -11,7 +11,7 @@ module.exports = {
         return axios.post('http://localhost:7777/api/users', body)
             .then((resp) => {
                 // console.log(resp.data[0])
-                return resp.data[0]
+                return resp.data
             })
             .catch(error => console.log(error))
     }
