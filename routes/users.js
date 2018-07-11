@@ -80,7 +80,7 @@ router
         }
         if (!body.lastname) {
           mistake.push({
-            message: " lastname require"
+            message: "lastname require"
           });
         }
 
@@ -113,7 +113,6 @@ router
 
       })
     } else {
-      console.log(res)
       res.json({
         message: "username or email is require"
       })
@@ -185,7 +184,11 @@ router
     if (body.id) {
       let sql = `DELETE FROM users WHERE id='${body.id}'`;
       doQuery(sql)
-        .then(resp => res.json("deleted success!"))
+        .then((resp) => {
+          res.json({
+            message: 'delete success'
+          })
+        })
         .catch(err => {
           res.json({
             message: err
