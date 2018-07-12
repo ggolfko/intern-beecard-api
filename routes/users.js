@@ -2,6 +2,7 @@ var express = require("express");
 var con = require("../config/route");
 var router = express.Router();
 var mongoObjectId = require("../utils/generateId");
+var doQuery = require('../utils/doQuery')
 
 router
   .route("/users")
@@ -10,13 +11,10 @@ router
     var sql = "SELECT * FROM users";
     const query = req.query;
     const body = req.body
-    // if(query.id){
-    //   sql = `SELECT * FROM users WHERE id='${query.id}'`
-    // }
     if (!!query.id) {
       sql = `SELECT * FROM users WHERE id='${body.id}'`;
     }
-    if(query.q){
+    if (query.q) {
       sql = `SELECT * FROM users WHERE firstname REGEXP '${query.q}' OR lastname REGEXP '${query.q}' 
       OR username REGEXP '${query.q}' OR email REGEXP '${query.q}'`
     }
@@ -30,6 +28,35 @@ router
         });
       });
   })
+
+router
+  .route("/users/:id")
+
+  .get((req, res) => {
+    const params = req.params;
+    var sql = `SELECT * FROM users WHERE id='${params.id}'`;
+    doQuery(sql)
+      .then(resp => res.json(resp))
+      .catch(err => {
+        res.json({
+          message: err
+        });
+      });
+  });
+
+router
+  .route('/users/pswd/:id')
+
+  .get((req, res) => {
+    const params = req.params
+    var sql = ` SELECT AES_DECRYPT(password) FROM users WHERE id='${params.id}'`
+    doQuery(sql).then((resp) => {
+      res.json(resp)
+    })
+  })
+
+router
+  .route('/users/create')
 
   .post((req, res) => {
     const body = req.body;
@@ -119,7 +146,10 @@ router
     }
   })
 
-  .put((req, res) => {
+router
+  .route('/users/update')
+
+  .post((req, res) => {
     const body = req.body
     if (body.username) {
       let sql = `SELECT * FROM users WHERE username LIKE '${body.username}'`
@@ -137,22 +167,21 @@ router
           mistake.push({
             message: 'Please, fill every information to update'
           })
+          action = false
         }
         if (!filter.test(body.email)) {
           mistake.push({
             message: 'email invalid format'
           })
+          action = false
         }
         if (mistake.length > 0) {
           res.json(mistake)
+          console.log(mistake)
         }
         console.log(action)
         return action
       }).then((resp) => {
-        console.log({
-          message: 'resp->then',
-          resp
-        })
         var filter = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
         if (resp && body.firstname && body.password && body.tel && body.lastname && filter.test(body.email)) {
           let sql = `UPDATE users SET firstname='${body.firstname}', lastname='${
@@ -162,7 +191,9 @@ router
             body.privilege
           }' WHERE id='${body.id}'`;
           doQuery(sql)
-            .then(resp => res.json("updated success!"))
+            .then(resp => res.json({
+              message: 'updated success'
+            }))
             .catch(err => {
               res.json({
                 message: err
@@ -179,7 +210,10 @@ router
 
   })
 
-  .delete((req, res) => {
+router
+  .route('/users/delete')
+  
+  .post((req, res) => {
     const body = req.body;
     if (body.id) {
       let sql = `DELETE FROM users WHERE id='${body.id}'`;
@@ -202,39 +236,5 @@ router
 
   });
 
-router
-  .route("/users/:id")
-
-  .get((req, res) => {
-    const params = req.params;
-    var sql = `SELECT * FROM users WHERE id='${params.id}'`;
-    doQuery(sql)
-      .then(resp => res.json(resp))
-      .catch(err => {
-        res.json({
-          message: err
-        });
-      });
-  });
-
-function doQuery(sql) {
-  return new Promise(function (resolve, reject) {
-    con.query(sql, function (err, result) {
-      if (err) reject(err);
-      resolve(result);
-    });
-  });
-}
-
-router
-  .route('/users/pswd/:id')
-
-  .get((req, res) => {
-    const params = req.params
-    var sql = ` SELECT AES_DECRYPT(password) FROM users WHERE id='${params.id}'`
-    doQuery(sql).then((resp) => {
-      res.json(resp)
-    })
-  })
 
 module.exports = router;
