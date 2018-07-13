@@ -6,6 +6,7 @@ const fs = require('fs')
 const path = require('path')
 const UPLOAD_PATH = 'uploads'
 const del = require('del')
+const doQuery = require('../utils/doQuery')
 
 var ID = function () {
   return Math.random().toString(36).substr(2, 9)
@@ -43,7 +44,7 @@ const upload = multer({
 const time = Date.now()
 
 router
-  .route('/images')
+  .route('/images/create')
 
   .post(upload.single('Images'), (req, res) => {
     console.log(req.file)
@@ -65,7 +66,11 @@ router
   })
 
 
-  .delete((req, res) => {
+
+router
+  .route('/images/delete')
+
+  .post((req, res) => {
     const body = req.body
     let sql = `SELECT * FROM images WHERE id='${body.id}'`
     doQuery(sql).then((resp) => {
@@ -81,19 +86,23 @@ router
       }
       return state
     }).then((state) => {
-      if(state){
+      if (state) {
         sql = `DELETE FROM images WHERE id='${body.id}'`
-        doQuery(sql).then((resp)=>{
+        doQuery(sql).then((resp) => {
           res.json({
             message: 'delete success'
           })
         })
-      }else{
-        res.json({message:'error'})
+      } else {
+        res.json({
+          message: 'error'
+        })
       }
-          
+
     })
   })
+
+
 
 
 router
@@ -117,22 +126,6 @@ router
     })
 
   })
-
-
-
-
-
-function doQuery(sql) {
-  return new Promise(function (resolve, reject) {
-    con.query(sql, function (err, result) {
-      if (err) reject(err);
-      resolve(result);
-    });
-  });
-}
-
-
-
 
 // function sha1(data) {
 //   var generator = crypto.createHash('sha1');

@@ -179,7 +179,6 @@ router
           res.json(mistake)
           console.log(mistake)
         }
-        console.log(action)
         return action
       }).then((resp) => {
         var filter = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/

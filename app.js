@@ -3,12 +3,6 @@ var app = express()
 var bodyParser = require('body-parser');
 var morgan = require('morgan')
 var methodOverride = require('method-override')
-// var config = require('config')
-
-// if(config.util.getEnv('NODE_ENV') !== 'test') {
-//     //use morgan to log at command line
-//     app.use(morgan('combined')); //'combined' outputs the Apache style LOGs
-// }
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
