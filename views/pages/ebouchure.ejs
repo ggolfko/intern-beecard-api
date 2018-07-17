@@ -1,0 +1,106 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <% include ../partials/head %>
+</head>
+
+<body class="container">
+
+  <header>
+    <% include ../partials/header %>
+  </header>
+
+  <main>
+      
+      <style>
+          table {
+              font-family: arial, sans-serif;
+              border-collapse: collapse;
+              width: 100%;
+          }
+          
+          td, th {
+              border: 1px solid #dddddd;
+              text-align: left;
+              padding: 8px;
+          }
+          
+          tr:nth-child(even) {
+              background-color: #dddddd;
+          }
+          </style>
+      <div class="jumbotron" style="overflow-x:auto;">
+          <h2>GET ebouchures</h2>
+          <table>
+              <tr>
+                  <th>id</th>
+                  <th>content</th>
+                  <th>organization</th>
+                  <th>tel</th>
+                  <th>email</th>
+                  <th>website</th>
+                  <th>line</th>
+                  <th>facebook</th>
+                  <th>twitter</th>
+                  <th>linkedin</th>
+                  <th>photo</th>
+                  <th>qrcode</th>
+                  <th>address</th>
+                  <th>locality</th>
+                  <th>region</th>
+                  <th>country</th>
+                  <th>postalcode</th>
+                  <th>active</th>
+                  <th>locale</th>
+                  <th>publish</th>
+                  <th>private</th>
+                  <th>market</th>
+                  <th>note</th>
+                  <th>option</th>
+              </tr>
+ 
+            <% data.forEach(function(Data) { %>
+                  <tr>
+                    <td><%= Data.id %></td>
+                    <td><%= Data.content %></td>
+                    <td><%= Data.organization %></td>
+                    <td><%= Data.tel %></td>
+                    <td><%= Data.email %></td>
+                    <td><%= Data.website %></td>
+                    <td><%= Data.line %></td>
+                    <td><%= Data.facebook %></td>
+                    <td><%= Data.twiiter %></td>
+                    <td><%= Data.linkedin %></td>
+                    <td><%= Data.photo %></td>
+                    <td><%= Data.qrcode %></td>
+                    <td><%= Data.address %></td>
+                    <td><%= Data.locality %></td>
+                    <td><%= Data.region %></td>
+                    <td><%= Data.country %></td>
+                    <td><%= Data.postalCode %></td>
+                    <td><%= Data.isActive %></td>
+                    <td><%= Data.locale %></td>
+                    <td><%= Data.publish %></td>
+                    <td><%= Data.private %></td>
+                    <td><%= Data.market %></td>
+                    <td><%= Data.note %></td>
+                    <td><button type="button" class="btn btn-info">edit</button>
+                      <button type="button" class="btn btn-danger">delete</button></td>
+                    
+                  </tr>    
+            <% }); %>
+          </table>
+        
+      </div> 
+  </main>
+
+
+  <footer>
+    <% include ../partials/footer %>
+  </footer>
+
+</body>
+
+</html>

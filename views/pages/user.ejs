@@ -1,0 +1,72 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <% include ../partials/head %>
+</head>
+
+<body class="container">
+
+  <header>
+    <% include ../partials/header %>
+  </header>
+
+  <main>
+      
+      <style>
+          table {
+              font-family: arial, sans-serif;
+              border-collapse: collapse;
+              width: 100%;
+          }
+          
+          td, th {
+              border: 1px solid #dddddd;
+              text-align: left;
+              padding: 8px;
+          }
+          
+          tr:nth-child(even) {
+              background-color: #dddddd;
+          }
+          </style>
+      <div class="jumbotron">
+          <h2>GET users</h2>
+          <table>
+              <tr>
+                  <th>id</th>
+                  <th>firstname</th>
+                  <th>lastname</th>
+                  <th>username</th>
+                  <th>email</th>
+                  <th>tel</th>
+                  <th>more</th>
+              </tr>
+ 
+            <% data.forEach(function(Data) { %>
+                  <tr>
+                    <td><%= Data.id %></td>
+                    <td><%= Data.firstname %></td>
+                    <td><%= Data.lastname %></td>
+                    <td><%= Data.username %></td>
+                    <td><%= Data.email %></td>
+                    <td><%= Data.tel %></td>
+                    <td><button type="button" class="btn btn-info">edit</button>
+                      <button type="button" class="btn btn-danger">delete</button></td>
+                    
+                  </tr>    
+            <% }); %>
+          </table>
+        
+      </div> 
+  </main>
+
+
+  <footer>
+    <% include ../partials/footer %>
+  </footer>
+
+</body>
+
+</html>
