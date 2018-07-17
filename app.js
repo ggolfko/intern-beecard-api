@@ -30,7 +30,6 @@ app.get('/', (req, res) => {
 app.get('/user', (req, res) => {
     let sql = `SELECT * FROM users`
     doQuery(sql).then((resp) => {
-        console.log(resp)
         res.render('pages/user', {
             data: resp
         })
@@ -44,7 +43,6 @@ app.get('/user/create', (req, res) => {
 app.get('/ebouchure', (req, res) => {
     let sql = `SELECT * FROM ebouchures`
     doQuery(sql).then((resp) => {
-        console.log(resp)
         res.render('pages/ebouchure', {
             data: resp
         })
