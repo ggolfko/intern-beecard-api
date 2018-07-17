@@ -25,6 +25,8 @@ app.set('view engine', 'ejs')
 app.get('/', (req, res) => {
     res.render('pages/index')
 })
+
+
 app.get('/user', (req, res) => {
     let sql = `SELECT * FROM users`
     doQuery(sql).then((resp) => {
@@ -34,6 +36,11 @@ app.get('/user', (req, res) => {
         })
     })
 })
+
+app.get('/user/create', (req, res) => {
+    res.render('pages/addUser')
+})
+
 app.get('/ebouchure', (req, res) => {
     let sql = `SELECT * FROM ebouchures`
     doQuery(sql).then((resp) => {
