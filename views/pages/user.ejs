@@ -32,7 +32,7 @@
           }
           </style>
       <div class="jumbotron">
-          <h2>GET users</h2>
+          <h2>Show users</h2>
           <table>
               <tr>
                   <th>id</th>
@@ -52,8 +52,14 @@
                     <td><%= Data.username %></td>
                     <td><%= Data.email %></td>
                     <td><%= Data.tel %></td>
-                    <td><button type="button" class="btn btn-info">edit</button>
-                      <button type="button" class="btn btn-danger">delete</button></td>
+                    <td><form>
+                        <button type="button" class="btn btn-info" onclick="window.location.href='/user/update'">edit</button>
+                        
+                    </form>
+                    <form action="/user/delete" method="post">
+                        <button type="submit" class="btn btn-danger">delete</button>
+                    </form>
+                      </td>
                     
                   </tr>    
             <% }); %>

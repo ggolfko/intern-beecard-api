@@ -14,15 +14,43 @@
 
   <main>
       
-      <div class="jumbotron">
-        <h2>Update user</h2><br>
-          firstname: <input type="text" name="fname" value""><br>
-          lastname:  <input type="text" name="lname" value""><br>
-          username:  <input type="text" name="username" value""><br>
-          email   :    <input type="text" name="email" value""><br>
-          tel     :      <input type="text" name="tel" value""><br>
-          <input type="submit" value="send">
+    <div class="jumbotron">
+      <form action="/user/update/updating" method="post">
+
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="validationDefault01">First name</label>
+            <input type="text" class="form-control" name="firstname" id="validationDefault01" placeholder='<%= data.firstname %>' value="" required>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="validationDefault02">Last name</label>
+            <input type="text" class="form-control" name="lastname" id="validationDefault02" placeholder="Last name" value="" required>
+          </div>        
+        <div class="col-md-6 mb-3">
+          <label for="validationDefault02">Username</label>
+          <input type="text" class="form-control" name="username" placeholder="username" value="" required>
+        </div>
+        <div class="col-md-6 mb-3">
+          <label for="validationDefault02">Password</label>
+          <input type="password" class="form-control" name="password" placeholder="password" value="" required>
+        </div>
+        <div class="col-md-6 mb-3">
+          <label for="validationDefault03">email</label>
+          <input type="email" class="form-control" name="email" id="validationDefault03" placeholder="email" required>
+        </div>
+        <div class="col-md-6 mb-3">
+          <label for="validationDefault04">tel</label>
+          <input type="text" class="form-control" name="tel" id="validationDefault04" placeholder="tel" required>
+        </div>
       </div>
+        <div>
+          <input type="submit" value="update" class="btn btn-primary">
+        </div>
+
+      </form>
+
+
+    </div>
   </main>
 
 

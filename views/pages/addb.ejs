@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <% include ../partials/head %>
+</head>
+
+<body class="container">
+
+  <header>
+    <% include ../partials/header %>
+  </header>
+
+  <main>
+    <div class="jumbotron">
+      <form action="/ebouchure/create/creating" method="post">
+
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="validationDefault01">name</label>
+            <input type="text" class="form-control" name="name" id="validationDefault01" placeholder="name" value="" required>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="validationDefault02">content</label>
+            <input type="text" class="form-control" name="content" id="validationDefault02" placeholder="content" value="" required>
+          </div>        
+        <div class="col-md-6 mb-3">
+          <label for="validationDefault02">organization</label>
+          <input type="text" class="form-control" name="organization" placeholder="organization" value="" required>
+        </div>
+        <div class="col-md-6 mb-3">
+          <label for="validationDefault03">email</label>
+          <input type="email" class="form-control" name="email" id="validationDefault03" placeholder="email" required>
+        </div>
+        <div class="col-md-6 mb-3">
+          <label for="validationDefault04">tel</label>
+          <input type="text" class="form-control" name="tel" id="validationDefault04" placeholder="tel" required>
+        </div>
+        <div class="col-md-6 mb-3">
+            <label for="validationDefault04">website</label>
+            <input type="text" class="form-control" name="website" id="validationDefault04" placeholder="website" required>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="validationDefault04">line</label>
+            <input type="text" class="form-control" name="line" id="validationDefault04" placeholder="line" required>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="validationDefault04">facebook</label>
+            <input type="text" class="form-control" name="facebook" id="validationDefault04" placeholder="facebook" required>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="validationDefault04">twitter</label>
+            <input type="text" class="form-control" name="twitter" id="validationDefault04" placeholder="twitter" required>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="validationDefault04">linkedin</label>
+            <input type="text" class="form-control" name="linkedin" id="validationDefault04" placeholder="linkedin" required>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="validationDefault04">photo</label>
+            <input type="text" class="form-control" name="photo" id="validationDefault04" placeholder="photo" required>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="validationDefault04">qrcode</label>
+            <input type="text" class="form-control" name="qrcode" id="validationDefault04" placeholder="qrcode" required>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="validationDefault04">address</label>
+            <input type="text" class="form-control" name="address" id="validationDefault04" placeholder="address" required>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="validationDefault04">locality</label>
+            <input type="text" class="form-control" name="locality" id="validationDefault04" placeholder="locality" required>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="validationDefault04">region</label>
+            <input type="text" class="form-control" name="region" id="validationDefault04" placeholder="region" required>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="validationDefault04">country</label>
+            <input type="text" class="form-control" name="country" id="validationDefault04" placeholder="country" required>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="validationDefault04">postalCode</label>
+            <input type="text" class="form-control" name="postalCode" id="validationDefault04" placeholder="postalCode" required>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="validationDefault04">locale</label>
+            <input type="text" class="form-control" name="locale" id="validationDefault04" placeholder="locale" required>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="validationDefault04">note</label>
+            <input type="text" class="form-control" name="note" id="validationDefault04" placeholder="note" required>
+          </div>
+      </div>
+        <div>
+          <input type="submit" value="submit" class="btn btn-primary">
+        </div>
+
+      </form>
+     
+
+    </div>
+  </main>
+
+
+  <footer>
+    <% include ../partials/footer %>
+  </footer>
+
+</body>
+
+</html>

@@ -56,12 +56,29 @@ app.post('/user/create/creating', (req, res) => {
 })
 
 app.get('/user/update', (req, res) => {
-    res.render('pages/updateUser')
+    return getUser().then((resp) => {
+        res.render('pages/putUser' , {
+            data: resp
+        })
+    })
+    
+})
+
+app.post('/user/delete', (req, res) => {
+    let body = req.body
+    let data = {
+        
+    }
+    return deleteUser().then((resp) => {
+        res.redirect('/user')
+    })
+    
 })
 
 app.post('/user/update/updating', (req, res) => {
     let body = req.body
     let data = {
+            id : req.query.id,
             firstname : body.firstname,
             lastname :  body.lastname,
             username:  body.username,
@@ -71,7 +88,7 @@ app.post('/user/update/updating', (req, res) => {
             privilege: "users"
         }
     return putUser(data).then((resp) => {
-
+        res.redirect('/user')
     })
 })
 
@@ -80,6 +97,38 @@ app.get('/ebouchure', (req, res) => {
         res.render('pages/ebouchure' ,{
             data: resp
         })
+    })
+})
+
+app.get('/ebouchure/create', (req, res) => {
+    res.render('pages/addb')
+})
+
+app.post('/ebouchure/create/creating', (req, res) => {
+    let body = req.body
+    let data = {
+        name: body.name,
+        content: body.content,
+        organization: body.organization,
+        tel: body.tel,
+        email: body.email,
+        website: body.website,
+        line: body.line,
+        facebook: body.facebook,
+        twitter: body.twitter,
+        linkedin: body.linkedin,
+        photo: body.photo,
+        qrcode: body.qrcode,
+        address: body.address,
+        locality: body.locality,
+        region: body.region,
+        country: body.country,
+        postalCode: body.postalCode,
+        locale: body.locale,
+        note: body.note
+      }
+    return postUser(data).then((resp) => {
+        res.redirect('/user')
     })
 })
 
