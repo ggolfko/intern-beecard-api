@@ -14,7 +14,7 @@ const putUser = require('./test/user').putUser
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
-    extended: true
+  extended: true
 }));
 
 app.use(morgan('dev'))
@@ -24,121 +24,131 @@ app.use('/uploads', express.static('uploads'))
 app.set('view engine', 'ejs')
 
 app.get('/', (req, res) => {
-    res.render('pages/index')
+  res.render('pages/index')
 })
 
 app.get('/user', (req, res) => {
-   return getUser().then((resp) => {
-       res.render('pages/user', {
-           data: resp
-       })
-   })
+  return getUser().then((resp) => {
+    res.render('pages/user', {
+      data: resp
+    })
+  })
 })
 
 app.get('/user/create', (req, res) => {
-    res.render('pages/addUser')
+  res.render('pages/addUser', {
+    data : []
+  })
 })
 
 app.post('/user/create/creating', (req, res) => {
-    let body = req.body
-    let data = {
-        firstname : body.firstname,
-        lastname :  body.lastname,
-        username:  body.username,
-        password:  body.password,
-        email: body.email,
-        tel: body.tel,
-        privilege: "users"
-      }
-    return postUser(data).then((resp) => {
-        res.redirect('/user')
-    })
+  let body = req.body
+  return postUser(body).then((resp) => {
+    if(resp.message == 'added success'){
+      res.redirect('/user')
+    }
+    if(resp.message == 'username or email is require'){
+      res.render('pages/addUser', {data: resp})
+    }
+    if(resp.length > 0){
+      res.render('pages/addUser', {data: resp})
+    }
+  })
 })
 
 app.get('/user/update', (req, res) => {
-    return getUser().then((resp) => {
-        res.render('pages/putUser' , {
-            data: resp
-        })
+  const query = req.query
+  if (query.id) {
+    return getUser(query.id).then((resp) => {
+      res.render('pages/putUser', {
+        data: resp[0]
+      })
     })
-    
+  } else {
+    res.redirect('/user')
+  }
+
+
+})
+
+app.get('/user/delete', (req, res) => {
+  const query = req.query
+  if (query.id) {
+    return getUser(query.id).then((resp) => {
+      res.render('pages/delUser', {
+        data: resp[0]
+      })
+    })
+  } else {
+    res.redirect('/user')
+  }
 })
 
 app.post('/user/delete', (req, res) => {
-    let body = req.body
-    let data = {
-        
-    }
-    return deleteUser().then((resp) => {
-        res.redirect('/user')
-    })
-    
+  let body = req.body
+  return deleteUser(body).then((resp) => {
+    res.redirect('/user')
+  })
+
 })
 
 app.post('/user/update/updating', (req, res) => {
-    let body = req.body
-    let data = {
-            id : req.query.id,
-            firstname : body.firstname,
-            lastname :  body.lastname,
-            username:  body.username,
-            password:  body.password,
-            email: body.email,
-            tel: body.tel,
-            privilege: "users"
-        }
-    return putUser(data).then((resp) => {
-        res.redirect('/user')
-    })
+  let body = req.body
+  // res.json(body)
+  return putUser(body).then((resp) => {
+    res.redirect('/user')
+  })
 })
 
 app.get('/ebouchure', (req, res) => {
-    return getEbouchure().then((resp) => {
-        res.render('pages/ebouchure' ,{
-            data: resp
-        })
+  return getEbouchure().then((resp) => {
+    res.render('pages/ebouchure', {
+      data: resp
     })
+  })
 })
 
 app.get('/ebouchure/create', (req, res) => {
-    res.render('pages/addb')
+  res.render('pages/addb')
 })
 
 app.post('/ebouchure/create/creating', (req, res) => {
-    let body = req.body
-    let data = {
-        name: body.name,
-        content: body.content,
-        organization: body.organization,
-        tel: body.tel,
-        email: body.email,
-        website: body.website,
-        line: body.line,
-        facebook: body.facebook,
-        twitter: body.twitter,
-        linkedin: body.linkedin,
-        photo: body.photo,
-        qrcode: body.qrcode,
-        address: body.address,
-        locality: body.locality,
-        region: body.region,
-        country: body.country,
-        postalCode: body.postalCode,
-        locale: body.locale,
-        note: body.note
-      }
-    return postUser(data).then((resp) => {
-        res.redirect('/user')
-    })
+  let body = req.body
+  return postEbouchure(body).then((resp) => {
+    res.redirect('/ebouchure')
+  })
 })
 
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*')
-    res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE')
-    res.header('Access-Control-Allow-Headers', "Origin, X-Requested-With, Content-Type, Accept")
-    res.header('Access-Control-Allow-Credentials', true)
+app.get('/ebouchure/update', (req, res) => {
+  const query = req.query
+  if (query.id) {
+    return getEbouchure(query.id).then((resp) => {
+      res.render('pages/putb', {
+        data: resp[0]
+      })
+    })
+  } else {
+    res.redirect('/ebouchure')
+  }
+})
 
-    next()
+app.post('/ebouchure/update/updating', (req, res) => {
+  let body = req.body
+  //  res.json(body)
+  return putEbouchure(body).then((resp) => {
+    res.redirect('/ebouchure')
+  })
+})
+
+
+
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*')
+  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE')
+  res.header('Access-Control-Allow-Headers', "Origin, X-Requested-With, Content-Type, Accept")
+  res.header('Access-Control-Allow-Credentials', true)
+
+  next()
 })
 
 module.exports = app

@@ -20,27 +20,30 @@
         <div class="row">
           <div class="col-md-6 mb-3">
             <label for="validationDefault01">First name</label>
-            <input type="text" class="form-control" name="firstname" id="validationDefault01" placeholder='<%= data.firstname %>' value="" required>
+            <input type="text" class="form-control" name="firstname" id="validationDefault01" placeholder="First name" value="<%= data.firstname %>" required>
           </div>
           <div class="col-md-6 mb-3">
             <label for="validationDefault02">Last name</label>
-            <input type="text" class="form-control" name="lastname" id="validationDefault02" placeholder="Last name" value="" required>
+            <input type="text" class="form-control" name="lastname" id="validationDefault02" placeholder="Last name" value="<%= data.lastname %>" required>
           </div>        
         <div class="col-md-6 mb-3">
           <label for="validationDefault02">Username</label>
-          <input type="text" class="form-control" name="username" placeholder="username" value="" required>
+          <input type="text" class="form-control" name="username" placeholder="username" value="<%= data.username %>" required>
         </div>
         <div class="col-md-6 mb-3">
           <label for="validationDefault02">Password</label>
-          <input type="password" class="form-control" name="password" placeholder="password" value="" required>
+          <input type="password" class="form-control" name="password" placeholder="password" value="<%= data.password %>" required>
         </div>
         <div class="col-md-6 mb-3">
           <label for="validationDefault03">email</label>
-          <input type="email" class="form-control" name="email" id="validationDefault03" placeholder="email" required>
+          <input type="email" class="form-control" name="email" id="validationDefault03" placeholder="email" value="<%= data.email %>" required>
         </div>
         <div class="col-md-6 mb-3">
           <label for="validationDefault04">tel</label>
-          <input type="text" class="form-control" name="tel" id="validationDefault04" placeholder="tel" required>
+          <input type="text" class="form-control" name="tel" id="validationDefault04" placeholder="tel" value="<%= data.tel %>" required>
+        </div>
+        <div class="col-md-6 mb-3">
+          <input type="hidden" class="form-control" name="id" id="validationDefault04" placeholder="tel" value="<%= data.id %>">
         </div>
       </div>
         <div>

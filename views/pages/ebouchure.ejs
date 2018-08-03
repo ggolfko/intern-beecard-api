@@ -13,7 +13,40 @@
   </header>
 
   <main>
-      
+    <script>
+        function myClick(id) {
+          console.log(id)
+          swal({
+              title: "Are you sure?",
+              text: "Once deleted, you will not be able to recover this imaginary file!",
+              icon: "warning",
+              buttons: true,
+              dangerMode: true,
+            })
+            .then((willDelete) => {
+              if (willDelete) {
+                $.post('http://localhost:7777/api/ebouchures/delete', {
+                  id: id
+                }, function (data, status) {
+                  if (data.message == "deleted success!") {
+                    swal("Poof! Your imaginary file has been deleted!", {
+                    icon: "success",
+                    }).then((willOk) => {
+                      if (willOk) {
+                        window.location.href = '/ebouchure'
+                      }
+                    })
+                  }else{
+                    swal("you have some problem");
+                  }
+                })
+              } else {
+                swal("Your imaginary file is safe!");
+              }
+            });
+  
+        }
+      </script>
       <style>
           table {
               font-family: arial, sans-serif;
@@ -36,6 +69,7 @@
           <table>
               <tr>
                   <th>id</th>
+                  <th>name</th>
                   <th>content</th>
                   <th>organization</th>
                   <th>tel</th>
@@ -64,6 +98,7 @@
             <% data.forEach(function(Data) { %>
                   <tr>
                     <td><%= Data.id %></td>
+                    <td><%= Data.name %></td>
                     <td><%= Data.content %></td>
                     <td><%= Data.organization %></td>
                     <td><%= Data.tel %></td>
@@ -86,8 +121,11 @@
                     <td><%= Data.private %></td>
                     <td><%= Data.market %></td>
                     <td><%= Data.note %></td>
-                    <td><button type="button" class="btn btn-info">edit</button>
-                      <button type="button" class="btn btn-danger">delete</button></td>
+                    <td><form>
+                            <button type="button" class="btn btn-info" onclick="window.location.href='/ebouchure/update?id=<%= Data.id %>'">edit</button>
+            
+                          </form>
+                      <button type="button" class="btn btn-danger" onclick="myClick('<%= Data.id %>')">delete</button></td>
                     
                   </tr>    
             <% }); %>

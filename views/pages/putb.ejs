@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <% include ../partials/head %>
+</head>
+
+<body class="container">
+
+  <header>
+    <% include ../partials/header %>
+  </header>
+
+  <main>
+    <div class="jumbotron">
+      <form action="/ebouchure/update/updating" method="post">
+
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="validationDefault01">name</label>
+            <input type="text" class="form-control" name="name" id="validationDefault01" placeholder="name" value="<%= data.name %>"
+              required>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="validationDefault02">content</label>
+            <input type="text" class="form-control" name="content" id="validationDefault02" placeholder="content" value="<%= data.content %>"
+              required>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="validationDefault02">organization</label>
+            <input type="text" class="form-control" name="organization" placeholder="organization" value="<%= data.organization %>" required>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="validationDefault03">email</label>
+            <input type="email" class="form-control" name="email" id="validationDefault03" placeholder="email" value="<%= data.email %>"
+              required>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="validationDefault04">cc_tel</label>
+            <input type="text" class="form-control" name="cc_tel" id="validationDefault04" placeholder="cc_tel" value="<%= data.cc_tel %>"
+              required>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="validationDefault04">tel</label>
+            <input type="text" class="form-control" name="tel" id="validationDefault04" placeholder="tel" value="<%= data.tel %>" required>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="validationDefault04">website</label>
+            <input type="text" class="form-control" name="website" id="validationDefault04" placeholder="website" value="<%= data.website %>"
+              required>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="validationDefault04">line</label>
+            <input type="text" class="form-control" name="line" id="validationDefault04" placeholder="line" value="<%= data.line %>"
+              required>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="validationDefault04">facebook</label>
+            <input type="text" class="form-control" name="facebook" id="validationDefault04" placeholder="facebook" value="<%= data.facebook %>"
+              required>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="validationDefault04">twitter</label>
+            <input type="text" class="form-control" name="twitter" id="validationDefault04" placeholder="twitter" value="<%= data.twitter %>"
+              required>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="validationDefault04">linkedin</label>
+            <input type="text" class="form-control" name="linkedin" id="validationDefault04" placeholder="linkedin" value="<%= data.linkedin %>"
+              required>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="validationDefault04">photo</label>
+            <input type="text" class="form-control" name="photo" id="validationDefault04" placeholder="photo" value="<%= data.photo %>"
+              required>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="validationDefault04">qrcode</label>
+            <input type="text" class="form-control" name="qrcode" id="validationDefault04" placeholder="qrcode" value="<%= data.qrcode %>"
+              required>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="validationDefault04">address</label>
+            <input type="text" class="form-control" name="address" id="validationDefault04" placeholder="address" value="<%= data.address %>"
+              required>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="validationDefault04">locality</label>
+            <input type="text" class="form-control" name="locality" id="validationDefault04" placeholder="locality" value="<%= data.locality %>"
+              required>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="validationDefault04">region</label>
+            <input type="text" class="form-control" name="region" id="validationDefault04" placeholder="region" value="<%= data.region %>"
+              required>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="validationDefault04">country</label>
+            <input type="text" class="form-control" name="country" id="validationDefault04" placeholder="country" value="<%= data.country %>"
+              required>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="validationDefault04">postalCode</label>
+            <input type="text" class="form-control" name="postalCode" id="validationDefault04" placeholder="postalCode" value="<%= data.postalCode %>"
+              required>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="validationDefault04">locale</label>
+            <input type="text" class="form-control" name="locale" id="validationDefault04" placeholder="locale" value="<%= data.locale %>"
+              required>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="validationDefault04">note</label>
+            <input type="text" class="form-control" name="note" id="validationDefault04" placeholder="note" value="<%= data.note %>"
+              required>
+          </div>
+          <div class="col-md-6 mb-3">
+            <input type="hidden" class="form-control" name="id" id="validationDefault04" placeholder="tel" value="<%= data.id %>">
+          </div>
+        </div>
+        <div>
+          <input type="submit" value="update" class="btn btn-primary">
+        </div>
+
+      </form>
+
+
+    </div>
+  </main>
+
+
+  <footer>
+    <% include ../partials/footer %>
+  </footer>
+
+</body>
+
+</html>

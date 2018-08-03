@@ -15,32 +15,47 @@
     <div class="jumbotron">
       <form action="/user/create/creating" method="post">
 
+        <label>
+          <%= data.message %>
+            <%if (data.length > 0) { %>
+              <%= data[0].message %>
+                <% } %>
+
+
+        </label>
+
         <div class="row">
-          <div class="col-md-6 mb-3">
-            <label for="validationDefault01">First name</label>
-            <input type="text" class="form-control" name="firstname" id="validationDefault01" placeholder="First name" value="" required>
+
+          <div class="col-md-4 mb-3">
+            <label for="validationCustom01">First name</label>
+            <input type="text" class="form-control" placeholder="First name" value="">
+            <div class="invalid-feedback">
+                <%if (data.length > 0) { %>
+                  <%= data[0].message %>
+                    <% } %>
+            </div>
           </div>
           <div class="col-md-6 mb-3">
             <label for="validationDefault02">Last name</label>
-            <input type="text" class="form-control" name="lastname" id="validationDefault02" placeholder="Last name" value="" required>
-          </div>        
-        <div class="col-md-6 mb-3">
-          <label for="validationDefault02">Username</label>
-          <input type="text" class="form-control" name="username" placeholder="username" value="" required>
+            <input type="text" class="form-control is-valid" name="lastname"  placeholder="Last name" value="">
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="validationDefault02">Username</label>
+            <input type="text" class="form-control" name="username" placeholder="username" value="">
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="validationDefault02">Password</label>
+            <input type="password" class="form-control" name="password" placeholder="password" value="">
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="validationDefault03">email</label>
+            <input type="email" class="form-control" name="email"  placeholder="email">
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="validationDefault04">tel</label>
+            <input type="text" class="form-control" name="tel"  placeholder="tel">
+          </div>
         </div>
-        <div class="col-md-6 mb-3">
-          <label for="validationDefault02">Password</label>
-          <input type="password" class="form-control" name="password" placeholder="password" value="" required>
-        </div>
-        <div class="col-md-6 mb-3">
-          <label for="validationDefault03">email</label>
-          <input type="email" class="form-control" name="email" id="validationDefault03" placeholder="email" required>
-        </div>
-        <div class="col-md-6 mb-3">
-          <label for="validationDefault04">tel</label>
-          <input type="text" class="form-control" name="tel" id="validationDefault04" placeholder="tel" required>
-        </div>
-      </div>
         <div>
           <input type="submit" value="submit" class="btn btn-primary">
         </div>
