@@ -41,7 +41,7 @@ app.get('/user/create', (req, res) => {
   })
 })
 
-app.post('/user/create/creating', (req, res) => {
+app.post('/user/create', (req, res) => {
   let body = req.body
   return postUser(body).then((resp) => {
     if(resp.message == 'added success'){

@@ -17,7 +17,7 @@
         <div class="row">
             
 
-          <div class="col-md-6 mb-3">
+          <div class="col-md-4 mb-3">
             <label for="validationCustom01">First name</label>
             <input type="text" class="form-control   <%if (data.length > 0) { %><%= data[0].message ? 'is-invalid':''  %>    <% } %>" placeholder="First name" value="">
             <div class="invalid-feedback">

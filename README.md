@@ -167,3 +167,12 @@ id is primary key that can take you update data
 	"firstname": "Kobe"
 }
 ```
+```
+POST method: 
+localhost:7777/api/.../post
+localhost:7777/api/.../update
+localhost:7777/api/.../delete
+
+API TEMPLATE
+localhost:777/
+```

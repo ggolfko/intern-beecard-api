@@ -24,7 +24,7 @@
           })
           .then((willDelete) => {
             if (willDelete) {
-              $.post('http://localhost:7775/api/users/delete', {
+              $.post('http://localhost:7777/api/users/delete', {
                 id: id
               }, function (data, status) {
                 if (data.message == "delete success") {
@@ -101,7 +101,6 @@
             <td>
               <form>
                 <button type="button" class="btn btn-info" onclick="window.location.href='/user/update?id=<%= Data.id %>'">edit</button>
-
               </form>
               <form>
                 <button type="button" class="btn btn-danger" onclick="myClick('<%= Data.id %>')">delete</button>
